@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4fobx+xvi8)^f_%9t5t0jgi7gj(=#^21y&o#9(ve4@(kauz#dh'
+SECRET_KEY = 'django-insecure-28q(esesigm5v53afslbpc78*$+y+aqbdvhd&k!=-r^!7=s*5m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,40 +31,24 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # local apps
-    'data',
+    # apps
     'articles',
-    'accounts',
+    'datas',
 
-    # 3rd party apps
-    'django_extensions',
-    'rest_framework',
-    'rest_framework.authtoken',
-
-    # DRF auth
-    'dj_rest_auth',
-    'dj_rest_auth.registration',
-
-    # signup 담당을 위해 필요 
-    'allauth', 
-    'allauth.account',
-    'allauth.socialaccount',
-
-    # CORS 세팅
-    'corsheaders',
-
-    # native apps
+    # django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
+
+    # 3rd party
+    'rest_framework',
+    
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -148,17 +132,3 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-AUTH_USER_MODEL = 'accounts.User'
-
-CORS_ALLOW_ALL_ORIGINS = True
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-
-        'rest_framework.permissions.IsAuthenticated'
-    ]
-}
