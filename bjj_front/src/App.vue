@@ -1,28 +1,46 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <p>hi</p>
+    <button @click="getData">
+      click
+    </button>
+
+    <div v-for="(video, index) in videos " :key="index">
+    {{ video.title }} <br>
+    <img :src="video.thumbnail"> <br>
+    <a :href="video.url">{{ video.url }}</a> <br>
+    {{ video.description }} <br>
+    channel : {{ video.channel }} <br><hr>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from "axios"
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      videos: [],
+    }
+  },
+  methods: {
+    getData() {
+      axios
+      .get('https://9df0-125-180-240-167.jp.ngrok.io/datas/list')
+      .then(res => {
+        this.videos = res.data
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+    }
   }
+
 }
 </script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
