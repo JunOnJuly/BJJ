@@ -9,3 +9,7 @@ class Video(models.Model):
     description = models.TextField()
     channel = models.TextField()
     black = models.BooleanField(default=0)
+
+class VideoComment(models.Model):
+    video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name='videocomments')
+    content = models.TextField()
