@@ -27,7 +27,7 @@ export default {
   methods: {
     getData() {
       axios
-      .get('https://9df0-125-180-240-167.jp.ngrok.io/datas/list')
+      .get('http://127.0.0.1:8000/datas/list')
       .then(res => {
         this.videos = res.data
         console.log(res)
