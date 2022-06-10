@@ -12,4 +12,3 @@ class VideoCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = VideoComment
         fields = '__all__'
-        read_only_fields = ('video',)
