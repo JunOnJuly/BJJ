@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 import requests
 from .models import Video
+from .serializers import VideoSerializer
 
 @api_view(['GET'])
 def get_video(request, query):
@@ -14,8 +15,6 @@ def get_video(request, query):
 
     response = requests.get(url).json()
     datas = response['items']
-
-    context = []
 
     for idx in range(len(datas)):
 
@@ -31,3 +30,10 @@ def get_video(request, query):
         )
 
     return Response({'status': 'success'})
+
+@api_view(['GET'])
+def send_video_list(request):
+    video = Video.objects.filter(black = 0)
+    serializer = VideoSerializer(video, many=True)
+
+    return Response(serializer.data)
