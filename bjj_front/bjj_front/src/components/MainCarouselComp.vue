@@ -1,43 +1,38 @@
 <template>
-  <div>
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
-      <div v-for="data in CarouselDatas" :key=data.title class="carousel-inner">
-        <div class="carousel-item active">
-          <img :src=data.thumbnail class="d-block w-100">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>{{ data.guard_name}}</h5>
-            <p> {{ data.description}} </p>
-          </div>
-        </div>
+  <button @click="SelectCardDatas">get random skills</button>
+  <div class="d-flex justify-content-center">
+    <div v-for="data in CardDatas" :key="data.title" class="card mx-3" style="width: 18rem;">
+      <img :src=data.thumbnail class="card-img-top">
+      <div class="card-body">
+        <h5 class="card-title">{{ data.title }}</h5>
+        <p class="card-text">{{ data.description }}</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    mounted () {
-      this.CarouselDatas = this.$store.datas.dispatch("SelectCarouselDatas")
-      console.log(this.CarouselDatas)
+    created() {
+      this.$store.commit('GetDataList')
     },
     data () {
       return {
-        CarouselDatas: []
+        CardDatas: []
       }
     },
+    methods: {
+      SelectCardDatas () {
+        this.$store.commit('SelectCardDatas')
+        this.CardDatas = this.$store.state.datas.CardData
+      }
+    }
   }
 </script>
 
 <style scoped>
   img {
-    height: 50rem;
+    height: 25rem;
   }
 </style>

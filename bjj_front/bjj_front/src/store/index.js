@@ -3,7 +3,6 @@ import datas from './modules/datas.js'
 
 export default createStore({
   routes: [
-    datas,
   ],
   state: {
   },
@@ -14,5 +13,6 @@ export default createStore({
   actions: {
   },
   modules: {
+    datas,
   }
 })

@@ -1,34 +1,32 @@
-import { createStore } from 'vuex'
 import axios from 'axios'
 import _ from 'lodash'
 
-export default createStore({
+export default ({
   state: {
-    DataList: []
+    DataList: [],
+    CardData: [],
   },
   getters: {
   },
   mutations: {
     GetDataList (state) {
-      axios
-      .get('http://127.0.0.1:8000/datas/list')
-      .then( res => {
-        state.DataList = res.data
-      })
-      .catch( err => {
-        console.log(err)
-      })
-    }
+      if (state.DataList.length === 0) {
+        axios
+        .get('http://127.0.0.1:8000/datas/list')
+        .then( res => {
+          state.DataList = res.data
+          console.log(res)
+        })
+        .catch( err => {
+          console.log(err)
+        })
+      }
+    },
+    SelectCardDatas (state) {
+      state.CardData = _.sampleSize(state.DataList, 6)
+    },
   },
   actions: {
-    SelectCarouselDatas (context) {
-      context.commit('GetDataList')
-      return _.sample(context.DataList, 6)
-    },
-    SelectAllDatas (context) {
-      context.commit('GetDataList')
-      return context.DataList
-    }
   },
   modules: {
   }
